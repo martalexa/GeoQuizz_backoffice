@@ -3,12 +3,12 @@
 		<h1>Series List! <router-link to="/series/add">Add new</router-link></h1>
 		<table>
 			<tbody>
-				<th>ID</th>
+				<th>Name</th>
 				<th>Distance</th>
 				<th>City</th>
 				<th>Actions</th>
 				<tr v-for="serie in series">
-					<td>{{serie.id}}</td>
+					<td>{{serie.name}}</td>
 					<td>{{serie.distance}}</td>
 					<td>{{serie.city.name}}</td>
 					<td>
@@ -17,9 +17,10 @@
 						<router-link :to="{name: 'serie_photos', params: {id: serie.id}}"><button>Ajouter des photos</button></router-link>
 						<router-link :to="{name: 'serie_rules', params: {id: serie.id}}"><button>Ajouter des règles</button></router-link>
 					</td>
+
 				</tr>
 			</tbody>
-				
+
 		</table>
 	</div>
 </template>
@@ -31,7 +32,7 @@
 	export default {
 		data() {
 			return {
-				
+
 			}
 		},
 		created() {
@@ -58,5 +59,5 @@
 </script>
 
 <style scoped>
-	
+
 </style>

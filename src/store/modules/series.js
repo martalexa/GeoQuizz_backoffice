@@ -52,6 +52,17 @@ export default {
         },
         addNewPhoto(state, n) {
             state.current_serie.photos.push(n)
+        },
+        patchSerie(state, s) {
+            // for(let i in state.series){
+            // 	if(state.series[i].id == s.id){
+            // 		state.series[i] = s
+            // 		state.series = state.series.splice()
+            // 		break
+            // 	}
+            // }
+            console.log('salut')
+            console.log(s)
         }
     },
     actions: {
@@ -73,7 +84,6 @@ export default {
         getCities({ commit }) {
             return private_api.get('/cities').then((res) => {
                 commit('setCities', res.data)
-                console.log(res.data)
             }).catch((res) => {
                 console.log(e)
             })
@@ -88,6 +98,14 @@ export default {
         getSerie({ commit }, serie_id) {
             private_api.get('/series/' + serie_id).then((res) => {
                 commit('setCurrentSerie', res.data)
+                return Promise.resolve(res)
+            }).catch((e) => {
+                return Promise.reject(e)
+            })
+        },
+        patchSerie({ commit, state }, serie) {
+            private_api.patch('series/' + state.current_serie.id + '/edit', serie).then((res) => {
+                commit('patchSerie', res.data)
                 return Promise.resolve(res)
             }).catch((e) => {
                 return Promise.reject(e)
