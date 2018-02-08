@@ -3,7 +3,8 @@ import ls from '@/services/ls'
 
 const initialState = {
 	series: [],
-	current_serie: null
+	current_serie: null,
+	cities: []
 }
 
 export default {
@@ -45,6 +46,9 @@ export default {
 		},
 		addSerie(state, s) {
 			state.series.push(s)
+		},
+		setCurrentSerie(state, s) {
+			state.current_serie = s
 		}
 	},
 	actions: {
@@ -75,6 +79,14 @@ export default {
 				commit('addSerie', res.data)
 			}).catch((e) => {
 				console.log(e)
+			})
+		},
+		getSerie({commit}, serie_id) {
+			private_api.get('/series/'+serie_id).then((res) => {
+				commit('setCurrentSerie', res.data)
+				return Promise.resolve(res)
+			}).catch((e) => {
+				return Promise.reject(e)
 			})
 		}
 	}
