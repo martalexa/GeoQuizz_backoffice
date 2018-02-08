@@ -4,22 +4,19 @@
 			<form>
 				<input type="file" name="image" accept="image/x-png,image/gif,image/jpeg" @change="onFileChange"/>
 				<v-text-field label="Description" v-model="newPhoto.description"></v-text-field>
-				<v-text-field label="Latitude" v-model="newPhoto.lat" required></v-text-field>
-				<v-text-field label="Longitude" v-model="newPhoto.lng" required></v-text-field>
+				<div class="column container" id="carte">
+					<div class="carte">
+						<!-- Map -->
+						<v-map ref="map" :zoom="13" :center="[48.6843900, 6.1849600]">
+							<v-tilelayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tilelayer>
+						</v-map>
+						<!-- End Map -->
+					</div>
+				</div>
 				<v-btn @click="submit">submit</v-btn>
 				<v-btn @click="clear">clear</v-btn>
 			</form>
 		</v-container>
-		<div class="column container" id="carte">
-			<div class="carte">
-				<!-- Map -->
-				<v-map ref="map" :zoom="13" :center="[48.6843900, 6.1849600]">
-					<v-tilelayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tilelayer>
-					<v-marker :lat-lng="[48.6843900, 6.1849600]"></v-marker>
-				</v-map>
-				<!-- End Map -->
-			</div>
-		</div>
 	</div>
 </template>
 
@@ -52,7 +49,8 @@ export default {
 			selectedPosition: {
 				lat: null,
 				lng: null
-			}
+			},
+			marker: null
 		}
 	},
 	created(){
@@ -61,11 +59,12 @@ export default {
 	mounted (){
 		//L.marker([50.5, 30.5]).addTo(this.$refs.map.mapObject);
 		this.$refs.map.mapObject.on('click', e => {
-			//markerGroup.removeLayer(219)
-			console.log(e)
-			this.selectedPosition.lat =e.latlng.lat
-			this.selectedPosition.lng = e.latlng.lng
-			L.marker([this.selectedPosition.lat, this.selectedPosition.lng]).addTo(this.$refs.map.mapObject)
+			if(this.marker !== null){
+				this.$refs.map.mapObject.removeLayer(this.marker)
+			}
+			this.newPhoto.lat = e.latlng.lat
+			this.newPhoto.lng = e.latlng.lng
+			this.marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.$refs.map.mapObject);
 		})
 	},
 	methods:{
