@@ -4,10 +4,12 @@
 		<form @submit.prevent="saveSerie()">
 			<input type="file" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
 			<input type="text" v-model="serie.distance" placeholder="Distance">
+			<input type="text" v-model="serie.name" placeholder="Type de lieu (ex: places, musées...)">
 			<select v-model="serie.city.id">
 				<option value="" selected>La ville</option>
 				<option v-for="city in cities" :value="city.id">{{city.name}}</option>
 			</select>
+			<img ref="prevImage" src="" alt="">
 			<button type="submit">Submit</button>
 		</form>
 	</div>
@@ -22,16 +24,18 @@
 			return {
 				serie: {
 					distance: null,
+					name :"",
 					city: {
 						id: null
 					},
 					image: ""
-				}
+				},
+				imageLoaded:false
 			}
 		},
 		created() {
 			this.$store.dispatch('series/getCities').then((res) => {
-				
+
 			}).catch((e) => {
 				console.log(e)
 			})
@@ -48,11 +52,10 @@
 				let reader = new FileReader()
 
 				let vm = this
-
 				reader.onload = (e) => {
 					vm.serie.image = e.target.result
 					vm.serie.image = vm.serie.image.split(',')[1]
-					console.log(vm.serie)
+					vm.$refs.prevImage.src = e.target.result
 				}
 				reader.readAsDataURL(files[0])
 			},
@@ -60,7 +63,7 @@
 				this.$store.dispatch('series/saveSerie', this.serie).then((res) => {
 					this.$router.push({name: 'series'})
 				}).catch((e) => {
-					
+
 				})
 			}
 		},
@@ -71,5 +74,5 @@
 </script>
 
 <style scoped>
-	
+
 </style>

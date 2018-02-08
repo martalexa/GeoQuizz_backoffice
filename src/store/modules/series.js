@@ -49,6 +49,17 @@ export default {
 		},
 		setCurrentSerie(state, s) {
 			state.current_serie = s
+		},
+		patchSerie(state, s ){
+			// for(let i in state.series){
+			// 	if(state.series[i].id == s.id){
+			// 		state.series[i] = s
+			// 		state.series = state.series.splice()
+			// 		break
+			// 	}
+			// }
+			console.log('salut')
+			console.log(s)
 		}
 	},
 	actions: {
@@ -86,6 +97,14 @@ export default {
 				commit('setCurrentSerie', res.data)
 				return Promise.resolve(res)
 			}).catch((e) => {
+				return Promise.reject(e)
+			})
+		},
+		patchSerie({commit, state}, serie){
+			private_api.patch('series/'+state.current_serie.id+ '/edit', serie).then ((res)=>{
+				commit('patchSerie', res.data)
+				return Promise.resolve(res)
+			}).catch((e)=>{
 				return Promise.reject(e)
 			})
 		}
