@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<p>Serie Photos</p>
-		<router-view/>
+		
 	</div>
 </template>
 

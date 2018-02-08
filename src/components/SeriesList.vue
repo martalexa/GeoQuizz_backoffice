@@ -13,9 +13,9 @@
 					<td>{{serie.city.name}}</td>
 					<td>
 						<button @click="deleteSerie(serie.id)">Supprimer</button>
-						<button @click="">Modifier</button>
-						<button @click="">Ajouter des photos</button>
-						<button @click="">Ajouter des règles</button>
+						<router-link :to="{name: 'edit_serie', params: {id: serie.id}}"><button>Modifier</button></router-link>
+						<router-link :to="{name: 'serie_photos', params: {id: serie.id}}"><button>Ajouter des photos</button></router-link>
+						<router-link :to="{name: 'serie_rules', params: {id: serie.id}}"><button>Ajouter des règles</button></router-link>
 					</td>
 				</tr>
 			</tbody>
@@ -46,6 +46,9 @@
 		methods: {
 			deleteSerie(serie_id){
 
+			},
+			modify(){
+				this.$router.push({name:'serie'})
 			}
 		},
 		computed: {
