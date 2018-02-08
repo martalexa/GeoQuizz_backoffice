@@ -73,6 +73,7 @@ export default {
         getCities({ commit }) {
             return private_api.get('/cities').then((res) => {
                 commit('setCities', res.data)
+                console.log(res.data)
             }).catch((res) => {
                 console.log(e)
             })
