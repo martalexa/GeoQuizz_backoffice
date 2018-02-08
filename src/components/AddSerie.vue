@@ -23,6 +23,7 @@
 		data() {
 			return {
 				serie: {
+					name: null,
 					distance: null,
 					name :"",
 					city: {

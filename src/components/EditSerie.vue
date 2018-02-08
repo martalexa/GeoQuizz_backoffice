@@ -4,7 +4,7 @@
 		<form @submit.prevent="saveSerie()">
 			<input type="file" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
 			<input type="text" v-model="serie.distance" placeholder="Distance">
-			<input type="text" v-model="serie.name" placeholder="Type de lieu (ex: place, musée...)">
+			<input type="text" v-model="serie.name" placeholder="Type de lieu (ex: places, musées...)">
 			<select v-model="serie.city_id">
 				<option value="" selected>La ville</option>
 				<option v-for="city in cities" :value="city.id">{{city.name}}</option>
