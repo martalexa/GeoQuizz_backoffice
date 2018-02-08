@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import interceptors from './services/interceptors'
+import Vue2Leaflet from 'vue2-leaflet'
 import Vuetify from 'vuetify'
 import ('../node_modules/vuetify/dist/vuetify.min.css')
 import colors from 'vuetify/es5/util/colors'
