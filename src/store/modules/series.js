@@ -53,36 +53,44 @@ export default {
 	},
 	actions: {
 		getSeries({commit}){
-			private_api.get('/series').then((res) => {
+			return private_api.get('/series').then((res) => {
 				commit('setSeries', res.data)
 				return Promise.resolve(res)
 			}).catch((e) => {
-				console.log(e)
+				return Promise.reject(e)
 			})
 		},
 		deleteSerie({commit}, serie_id){
 			return private_api.delete('/series').then((res) => {
 				commit('removeSerie', serie_id)
 			}).catch((e) => {
-				console.log(e)
+				return Promise.reject(e)
 			})
 		},
 		getCities({commit}){
 			return private_api.get('/cities').then((res) => {
 				commit('setCities', res.data)
-			}).catch((res) => {
-				console.log(e)
+			}).catch((err) => {
+				return Promise.reject(err)
 			})
 		},
 		saveSerie({commit}, serie) {
-			private_api.post('/series',serie).then((res) => {
+			return private_api.post('/series',serie).then((res) => {
 				commit('addSerie', res.data)
 			}).catch((e) => {
-				console.log(e)
+				return Promise.reject(e)
 			})
 		},
 		getSerie({commit}, serie_id) {
-			private_api.get('/series/'+serie_id).then((res) => {
+			return private_api.get('/series/'+serie_id).then((res) => {
+				commit('setCurrentSerie', res.data)
+				return Promise.resolve(res)
+			}).catch((e) => {
+				return Promise.reject(e)
+			})
+		},
+		saveRules({commit, state}, serie){
+			return private_api.put('/series/'+state.current_serie.id+'/rules', serie).then((res) => {
 				commit('setCurrentSerie', res.data)
 				return Promise.resolve(res)
 			}).catch((e) => {
