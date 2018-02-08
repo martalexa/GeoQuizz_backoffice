@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<p>Series space</p>
 		<router-view/>
 	</div>
 </template>
@@ -14,5 +13,5 @@
 </script>
 
 <style scoped>
-	
+
 </style>

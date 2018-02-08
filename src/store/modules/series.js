@@ -2,9 +2,9 @@ import private_api from '@/services/private'
 import ls from '@/services/ls'
 
 const initialState = {
-	series: [],
-	current_serie: null,
-	cities: []
+    series: [],
+    current_serie: null,
+    cities: []
 }
 
 export default {
@@ -49,7 +49,21 @@ export default {
 		},
 		setCurrentSerie(state, s) {
 			state.current_serie = s
-		}
+		},
+		addNewPhoto(state, n) {
+            state.current_serie.photos.push(n)
+        },
+        patchSerie(state, s) {
+            // for(let i in state.series){
+            // 	if(state.series[i].id == s.id){
+            // 		state.series[i] = s
+            // 		state.series = state.series.splice()
+            // 		break
+            // 	}
+            // }
+            console.log('salut')
+            console.log(s)
+        }
 	},
 	actions: {
 		getSeries({commit}){
@@ -96,6 +110,23 @@ export default {
 			}).catch((e) => {
 				return Promise.reject(e)
 			})
-		}
+		},
+        patchSerie({ commit, state }, serie) {
+            private_api.patch('series/' + state.current_serie.id + '/edit', serie).then((res) => {
+                commit('patchSerie', res.data)
+                return Promise.resolve(res)
+            }).catch((e) => {
+                return Promise.reject(e)
+            })
+        },
+        addPhoto({ commit, state }, newphoto) {
+            private_api.post('/series/' + state.current_serie.id + '/photos', newphoto).then((res) => {
+                console.log(state.current_serie.id)
+                commit('addNewPhoto', res.data)
+                return Promise.resolve(res)
+            }).catch((e) => {
+                return Promise.reject(e)
+            })
+        }
 	}
 }
