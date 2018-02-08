@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view/>
+    <v-app light>
+      <v-container mt-5 id="main">
+        <router-view/>
+      </v-container>
+    </v-app>
   </div>
 </template>
 

@@ -58,7 +58,7 @@
 			},
 			saveSerie() {
 				this.$store.dispatch('series/saveSerie', this.serie).then((res) => {
-					this.$router.push({name: 'series'})
+					this.$router.push({name: 'series_list'})
 				}).catch((e) => {
 					
 				})

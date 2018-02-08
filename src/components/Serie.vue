@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<p>Serie details</p>
+		<router-view></router-view>
 	</div>
 </template>
 
