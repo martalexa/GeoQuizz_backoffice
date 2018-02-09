@@ -12,8 +12,13 @@
 		         </v-card-media>
 		         <v-card-title primary-title>
 		           <div>
-		             <h3 class="headline mb-0">{{typeBind}} - {{villeBind.name}} </h3>
-		             <div>{{distanceBind}} <span class="unite">(metres)</span></div>
+		             <h3 class="headline mb-0">
+								 	<!-- Bind avec le champs associé / Si rien écrit affiche la valeur initiale -->
+									 	<span v-if="typeBind.length!==0">{{typeBind}}</span> <span v-else class="villeCurrent">{{villeCurrent.name}}</span>
+										<span v-if="villeBind.length!==0"> - {{villeBind.name}}</span> <span v-else class="villeCurrent"> - {{villeCurrent.city.name}}</span>
+									</h3>
+		             <div>
+								 	<span v-if="distanceBind.length!==0">{{distanceBind}}</span> <span v-else class="villeCurrent">{{villeCurrent.distance}}</span> <span class="unite">(metres)</span></div>
 		           </div>
 		         </v-card-title>
 		       </v-card>
@@ -40,7 +45,7 @@
 				<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
 
 
-
+				<p>{{villeCurrent}}</p>
 
 
 
@@ -113,7 +118,8 @@
 
 		},
 		computed: {
-		...mapGetters({cities: 'series/getCities'})
+		...mapGetters({cities: 'series/getCities'}),
+		...mapGetters({villeCurrent: 'series/getCurrentSerie'})
 		}
 	}
 </script>
@@ -127,5 +133,8 @@
 h1{
 	margin-left:50px;
 	margin-bottom :20px
+}
+.villeCurrent{
+	color:grey;
 }
 </style>
