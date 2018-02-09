@@ -6,10 +6,10 @@
               Erreur lors de la connexion
             </v-alert>
             <h1>Connexion</h1>
-            <form @submit.prevent>
+            <form @submit.prevent="signin()" @keyup.enter="signin()">
               <v-text-field type="text" v-model="user.username" placeholder="Login" required></v-text-field>
               <v-text-field type="password" v-model="user.password" placeholder="Password" required></v-text-field>
-              <v-btn @click="signin()">Se connecter</v-btn>
+              <v-btn type='submit'>Se connecter</v-btn>
             </form>
 	        </v-flex>
 
