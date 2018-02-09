@@ -36,6 +36,7 @@
 					<v-text-field color="green" type="text" v-model="serie.distance" :label="villeCurrent.distance"></v-text-field>
 
 					<v-btn @click="saveSerie">submit</v-btn>
+
 					<router-link to="/series/all"><v-btn color="red">Cancel</v-btn></router-link>
 				</form>
 			</v-flex>

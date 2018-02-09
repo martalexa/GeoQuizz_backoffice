@@ -66,10 +66,10 @@ export default {
 		}
 	},
 	created(){
-		
+
 	},
 	mounted (){
-		
+
 		this.$refs.map.mapObject.on('click', e => {
 			if(this.marker !== null){
 				this.$refs.map.mapObject.removeLayer(this.marker)
@@ -80,10 +80,12 @@ export default {
 		})
 	},
 	methods:{
- 
+
         submit(){
 			this.$store.dispatch('series/addPhoto', this.newPhoto).then((res) => {
+
 				this.dialog=true
+
 			}).catch((e) => {
 				console.log(e)
 			})
@@ -108,8 +110,8 @@ export default {
 			this.newPhoto.lng=""
 			this.newPhoto.description=""
 			this.newPhoto.photo=""
-			this.newSelectedPosition.lat =null
-			this.newSelectedPosition.lng=null
+			this.selectedPosition.lat =null
+			this.selectedPosition.lng=null
 			this.marker=null
 			this.dialog=false
 		},
@@ -132,6 +134,7 @@ export default {
 	#carte{
   		z-index:1;
 	}
+
 	#dialog {
 		z-index:999;
 	}
