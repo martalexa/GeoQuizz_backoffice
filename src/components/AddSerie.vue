@@ -21,10 +21,7 @@
 	       </v-card>
 	     </v-flex>
 	   </v-layout>
-
-
-
-
+		 
 		<form @submit.prevent>
 
 			<v-flex class="text-xs-center">
