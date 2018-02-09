@@ -26,13 +26,15 @@
 		  <v-flex xs12 sm5 offset-sm1>
 				<form @submit.prevent="saveSerie()">
 
+					<v-text-field :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
+					<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
+
 					<v-text-field type="text" v-model="serie.name" placeholder="Type de lieu (ex: places, musées...)" required ></v-text-field>
 					<v-select label="Ville" v-model="serie.city_id" item-value="id" item-text="name" :items="cities"></v-select>
 					<v-text-field type="text" v-model="serie.distance" placeholder="Distance" required></v-text-field>
 
-					<v-text-field :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
-					<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
 					<v-btn @click="saveSerie">submit</v-btn>
+
 				</form>
 		</v-flex>
 
