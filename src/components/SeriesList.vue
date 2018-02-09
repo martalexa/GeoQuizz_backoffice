@@ -65,7 +65,6 @@ export default {
 		deleteSerie(serie_id){
 			this.$store.dispatch('series/deleteSerie', serie_id).then((res) => {
 				this.dialog = true
-				console.log(res)
 			}).catch((err) => {
 				console.log(err);
 			})

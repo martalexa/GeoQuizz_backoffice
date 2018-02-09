@@ -112,6 +112,7 @@ export default {
 			this.newPhoto.photo=""
 			this.selectedPosition.lat =null
 			this.selectedPosition.lng=null
+			this.marker.remove()
 			this.marker=null
 			this.dialog=false
 		},
