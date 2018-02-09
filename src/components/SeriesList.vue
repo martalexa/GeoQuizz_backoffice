@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add"><v-icon color="light-green darken-1">add_circle</v-icon></router-link></h1>
+		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add"><v-icon x-large color="light-green darken-1">add_circle</v-icon></router-link></h1>
 	</br>
 
 	<v-layout row wrap>
@@ -30,7 +30,15 @@
 			</table>
 		</v-flex>
 	</v-layout>
-
+	<v-dialog v-model="dialog" persistent max-width="290">
+		<v-card>
+			<v-card-text>La série à été suprimée</v-card-text>
+			<v-card-actions>
+				<v-spacer></v-spacer>
+				<v-btn color="green darken-1" flat @click.native="dialog = false">Ok</v-btn>
+			</v-card-actions>
+		</v-card>
+	</v-dialog>
 </div>
 </template>
 
@@ -41,7 +49,7 @@ import { mapGetters } from 'vuex'
 export default {
 	data() {
 		return {
-
+			dialog: false
 		}
 	},
 	created() {
@@ -55,15 +63,20 @@ export default {
 	},
 	methods: {
 		deleteSerie(serie_id){
-
+			this.$store.dispatch('series/deleteSerie', serie_id).then((res) => {
+				this.dialog = true
+				console.log(res)
+			}).catch((err) => {
+				console.log(err);
+			})
 		},
-		modify(){
-			this.$router.push({name:'serie'})
-		}
-	},
-	computed: {
-		...mapGetters({series: 'series/getSeries'})
+	modify(){
+		this.$router.push({name:'serie'})
 	}
+},
+computed: {
+	...mapGetters({series: 'series/getSeries'})
+}
 }
 </script>
 

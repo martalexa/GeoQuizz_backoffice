@@ -74,9 +74,10 @@ export default {
 				return Promise.reject(e)
 			})
 		},
-		deleteSerie({commit}, serie_id){
-			return private_api.delete('/series').then((res) => {
+		deleteSerie({commit,state}, serie_id){
+			return private_api.delete('/series/'+serie_id).then((res) => {
 				commit('removeSerie', serie_id)
+				console.log(res)
 			}).catch((e) => {
 				return Promise.reject(e)
 			})

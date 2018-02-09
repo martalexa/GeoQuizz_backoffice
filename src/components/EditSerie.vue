@@ -8,14 +8,16 @@
 		<v-layout row wrap>
 			<v-flex xs12 sm4 offset-sm1>
 		      <v-card>
-					 	<v-card-media :src="prevImage" height="400px"></v-card-media>
-		        	<v-card-title primary-title>
+						 <v-card-media v-if="this.imageVide" :src="'http://web.geoquizz.local:10085/uploads/'+villeCurrent.image" height="400px"></v-card-media>
+						 <v-card-media v-else :src="prevImage" height="400px"></v-card-media>
+							<v-card-title primary-title>
 		           <div>
 		             <h3 class="headline mb-0">
 									 	<span v-if="serie.name.length!==0">{{serie.name}}</span> <span v-else class="villeCurrent">{{villeCurrent.name}}</span>
 									</h3>
 		             <div>
 								 <span v-if="serie.distance!==null">{{serie.distance}}</span> <span v-else class="villeCurrent">{{villeCurrent.distance}}</span> <span class="unite">(metres)</span>
+
 	           	 	</div>
 							 </div>
 		         </v-card-title>
@@ -26,15 +28,14 @@
 		  <v-flex xs12 sm5 offset-sm1>
 				<form @submit.prevent="saveSerie()">
 
-					<v-text-field :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
-					<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
+					<v-text-field color="green" :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
+					<input type="file"color="green" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
 
-					<v-text-field type="text" v-model="serie.name" placeholder="Type de lieu (ex: places, musées...)" required ></v-text-field>
-					<v-select label="Ville" v-model="serie.city_id" item-value="id" item-text="name" :items="cities"></v-select>
-					<v-text-field type="text" v-model="serie.distance" placeholder="Distance" required></v-text-field>
+					<v-text-field color="green" type="text" v-model="serie.name" :label="villeCurrent.name"></v-text-field>
+					<v-select color="green" :label="villeCurrent.city.name" v-model="serie.city_id" item-value="id" item-text="name" :items="cities"></v-select>
+					<v-text-field color="green" type="text" v-model="serie.distance" :label="villeCurrent.distance"></v-text-field>
 
 					<v-btn @click="saveSerie">submit</v-btn>
-
 				</form>
 		</v-flex>
 
@@ -57,7 +58,8 @@
 					name : "",
 				},
 				label : 'photo',
-				prevImage: ''
+				prevImage: '',
+				imageVide : true
 			}
 		},
 		created() {
@@ -74,6 +76,7 @@
             this.$refs.image.click ()
         },
 			fileChange(e){
+				this.imageVide=false
 				let files = e.target.files || e.dataTransfer.files
 				if(!files.length)
 					return
@@ -121,5 +124,8 @@ h1{
 }
 .villeCurrent{
 	color:grey;
+}
+.imageDefault{
+	margin: 0 50px;
 }
 </style>
