@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add"><v-icon x-large color="light-green darken-1">add_circle</v-icon></router-link></h1>
+		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add" class="lien"><v-icon x-large color="light-green darken-1">add_circle</v-icon></router-link></h1>
 	</br>
 
 	<v-layout row wrap>
@@ -16,7 +16,7 @@
 				</thead>
 				<tbody v-for="serie in series">
 					<tr>
-						<td class="text-xs-center"><b>{{serie.name}}</b></td>
+						<td class="text-xs-center"><b><router-link :to="{name: 'edit_serie', params: {id: serie.id}}" class="lien">{{serie.name}}</router-link></b></td>
 						<td class="text-xs-center">{{serie.distance}}</td>
 						<td class="text-xs-center">{{serie.city.name}}</td>
 						<td class="text-xs-center">
@@ -40,6 +40,7 @@
 		</v-card>
 	</v-dialog>
 </div>
+
 </template>
 
 <script>
@@ -81,7 +82,9 @@ computed: {
 </script>
 
 <style scoped>
-.titre{
+.lien {
 	text-decoration: none;
+	color:#191919;
+	font-size: 1.3em;
 }
 </style>
