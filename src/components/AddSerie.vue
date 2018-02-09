@@ -21,11 +21,9 @@
 	       </v-card>
 	     </v-flex>
 	   </v-layout>
+		 
+		<form @submit.prevent>
 
-
-
-
-		<form @submit.prevent="">
 			<v-flex class="text-xs-center">
 				<v-text-field :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
 				<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">

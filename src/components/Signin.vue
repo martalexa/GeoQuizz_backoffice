@@ -1,13 +1,22 @@
 <template>
-  <div>
-      <h1>Connexion</h1>
-      <form @submit.prevent="signin()">
-        Login: <input v-model="user.username" type="text" name=""/>
-        Password: <input v-model="user.password" type="password" name=""/>
-        <input type="submit" name=""/>
-      </form>
-      <signup></signup>
-  </div>
+  <v-container fill-height text-xs-center>
+      <v-layout row wrap align-center>
+	        <v-flex xs12 sm12 md5 lg5 xl5>
+            <v-alert color="error" icon="warning" value="true" dismissible v-model="alertConnexion">
+              Erreur lors de la connexion
+            </v-alert>
+            <h1>Connexion</h1>
+            <form @submit.prevent="signin()" @keyup.enter="signin()">
+              <v-text-field type="text" v-model="user.username" placeholder="Login" required></v-text-field>
+              <v-text-field type="password" v-model="user.password" placeholder="Password" required></v-text-field>
+              <v-btn type='submit'>Se connecter</v-btn>
+            </form>
+	        </v-flex>
+
+          <signup></signup>
+
+      </v-layout>     
+  </v-container>
 </template>
 
 <script>
@@ -20,7 +29,8 @@ export default {
       user: {
         username: "",
         password: ""
-      }
+      },
+      alertConnexion: false
     }
   },
 
@@ -29,7 +39,9 @@ export default {
       this.$store.dispatch('auth/login', this.user).then((res) => {
         this.$router.push({name: 'series_list'})
       }).catch((e) => {
-        console.log(e)
+        if(e.response.status = 401){
+          this.alertConnexion = true
+        }
       })
     }
   }
