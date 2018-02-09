@@ -113,7 +113,7 @@ export default {
 			})
 		},
         patchSerie({ commit, state }, serie) {
-           return private_api.patch('series/' + state.current_serie.id + '/edit', serie).then((res) => {
+            private_api.patch('series/' + state.current_serie.id + '/edit', serie).then((res) => {
                 commit('patchSerie', res.data)
                 return Promise.resolve(res)
             }).catch((e) => {
