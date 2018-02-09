@@ -1,26 +1,53 @@
 <template>
 	<div>
-		<h1>Modifier une serie</h1>
-		<form @submit.prevent="saveSerie()">
 
-			<v-text-field :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
-			<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
+		<v-flex xs12 sm5 offset-sm1>
+			<h1>Modifier une serie</h1>
+		</v-flex>
 
-			<v-text-field type="text" v-model="serie.distance" placeholder="Distance" required></v-text-field>
-			<v-text-field type="text" v-model="serie.name" placeholder="Type de lieu (ex: places, musées...)" required></v-text-field>
+			<v-layout row wrap>
+				<v-flex xs12 sm4 offset-sm1>
+		       <v-card>
+		         <v-card-media ref="prevImage" src="" height="400px">
+		         </v-card-media>
+		         <v-card-title primary-title>
+		           <div>
+		             <h3 class="headline mb-0">{{typeBind}} - {{villeBind.name}} </h3>
+		             <div>{{distanceBind}} <span class="unite">(metres)</span></div>
+		           </div>
+		         </v-card-title>
+		       </v-card>
+				</v-flex>
 
 
-	<!-- <v-select :items="cities" label="La ville" item-text="name" item-value="id" v-model="serie.city.id"></v-select>-->
 
-			<select v-model="serie.city_id">
-				<option value="" selected>La ville</option>
-				<option v-for="city in cities" :value="city.id">{{city.name}}</option>
-			</select>
 
-			<v-select label="Ville" item-text="name" v-model="select" :items="cities"></v-select>
 
-			<v-btn @click="saveSerie">submit</v-btn>
-		</form>
+		  <v-flex xs12 sm5 offset-sm1>
+			<form @submit.prevent="saveSerie()">
+
+
+	<!--	<select v-model="serie.city_id">
+					<option value="" selected>La ville</option>
+					<option v-for="city in cities" :value="city.id">{{city.name}}</option>
+				</select> -->
+
+				<v-text-field type="text" v-model="typeBind" placeholder="Type de lieu (ex: places, musées...)" required ></v-text-field>
+				<v-select label="Ville" v-model="villeBind" item-text="name" :items="cities"></v-select>
+				<v-text-field type="text" v-model="distanceBind" placeholder="Distance" required></v-text-field>
+
+				<v-text-field :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
+				<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
+
+
+
+
+
+
+				<v-btn @click="saveSerie">submit</v-btn>
+			</form>
+		</v-flex>
+		</v-layout>
 	</div>
 </template>
 
@@ -36,9 +63,12 @@
 					distance: null,
 					city_id: null,
 					image: "",
-					name : ""
+					name : "",
 				},
-				label : 'photo'
+				label : 'photo',
+				distanceBind :"",
+				typeBind:"",
+				villeBind:""
 			}
 		},
 		created() {
@@ -89,5 +119,13 @@
 </script>
 
 <style scoped>
-
+.unite{
+	color:grey;
+	margin-left : 5px;
+	font-size:0.85em;
+}
+h1{
+	margin-left:50px;
+	margin-bottom :20px
+}
 </style>
