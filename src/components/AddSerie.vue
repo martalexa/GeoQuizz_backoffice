@@ -15,8 +15,9 @@
 				<v-text-field label="Nom de la série" v-model="serie.name" required></v-text-field>
 				<v-select :items="cities" label="La ville" item-text="name" item-value="id" v-model="serie.city.id"></v-select>
 				<v-btn @click="saveSerie">submit</v-btn>
+				
 			</v-flex>
-			
+
 		</form>
 	</div>
 </template>
@@ -57,7 +58,7 @@
 			},
 			fileChange(e){
 				let files = e.target.files || e.dataTransfer.files
-				
+
 				if(!files.length)
 					return;
 				this.label = files[0].name
