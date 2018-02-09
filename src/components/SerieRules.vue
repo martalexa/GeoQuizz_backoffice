@@ -41,7 +41,7 @@
 										<v-icon color="error" v-if="current_serie.times.length > 1" type="button" @click="removeTime(index)">delete_forever</v-icon>
 									</v-flex>
 								</v-layout>
-								<v-btn color="primary" type="button" @click="addTime()">Ajouter</v-btn>
+								<v-btn color="primary" type="button" @click="addTime()">Add</v-btn>
 							</v-container>
 						</v-card-text>
 					</v-card>
@@ -67,8 +67,7 @@
 					//Submitting
 					console.log(this.current_serie)
 					this.$store.dispatch('series/saveRules', this.current_serie).then((res) => {
-						console.log('Success 2')
-						console.log(res)
+                        this.$router.push({name: 'series_list'})
 					}).catch((e) => {
 						console.log('Failure 2')
 						console.log(e)
