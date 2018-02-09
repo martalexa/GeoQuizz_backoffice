@@ -8,7 +8,8 @@
 
 		<v-flex xs12 sm4 offset-sm1>
 				<v-card>
-					<v-card-media :src="prevImage" height="400px"></v-card-media>
+					<v-card-media class="imageDefault" v-if="this.imageVide" src="https://www.museumconnections.com/wp-content/uploads/2017/03/picto-carte.png" height="400px"></v-card-media>
+					<v-card-media v-else :src="prevImage" height="400px"></v-card-media>
 						<v-card-title primary-title>
 						 <div>
 							 <h3 class="headline mb-0">
@@ -27,12 +28,12 @@
 		<form @submit.prevent>
 			<v-flex class="text-xs-center">
 
-				<v-text-field :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
+				<v-text-field color="green" :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
 				<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
 
-				<v-text-field label="Type de lieu" v-model="serie.name"></v-text-field>
-				<v-select :items="cities" label="La ville" item-text="name" item-value="id" v-model="serie.city.id"></v-select>
-				<v-text-field label="Distance" v-model="serie.distance"></v-text-field>
+				<v-text-field color="green" label="Type de lieu" v-model="serie.name"></v-text-field>
+				<v-select color="green" :items="cities" label="La ville" item-text="name" item-value="id" v-model="serie.city.id"></v-select>
+				<v-text-field color="green" label="Distance" v-model="serie.distance"></v-text-field>
 
 				<v-btn @click="saveSerie">submit</v-btn>
 			</v-flex>
@@ -61,7 +62,8 @@
 				},
 				imageLoaded:false,
 				prevImageBool: false,
-				prevImage: ''
+				prevImage: '',
+				imageVide:true
 			}
 		},
 		created() {
@@ -80,6 +82,7 @@
 			},
 			fileChange(e){
 				let files = e.target.files || e.dataTransfer.files
+				this.imageVide=false
 				if(!files.length)
 					return
 				let image = new Image()
@@ -129,5 +132,12 @@ img{
 	color:grey;
 	margin-left : 5px;
 	font-size:0.85em;
+}
+h1{
+	margin-left:50px;
+	margin-bottom :20px
+}
+.imageDefault{
+	margin: 0 60px;
 }
 </style>
