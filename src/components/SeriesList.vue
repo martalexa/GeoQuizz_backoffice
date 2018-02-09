@@ -4,6 +4,7 @@
 		</br>
 
 		<v-layout row wrap>
+					<v-btn @click="logout()">Logout</v-btn>
 	          <v-flex xs12 xl6 offset-xl3>
 	            <table class="table is-striped">
 	              <thead>
@@ -59,6 +60,14 @@
 			},
 			modify(){
 				this.$router.push({name:'serie'})
+			},
+			logout(){
+				this.$store.dispatch('auth/logout').then((res) => {
+					console.log('bye')
+					this.$router.push({name:'signin'})
+                }).catch((e) => {
+                    
+                })
 			}
 		},
 		computed: {

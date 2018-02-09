@@ -77,7 +77,7 @@
 		methods: {
 			pickFile () {
             this.$refs.image.click ()
-        },
+        	},
 			deleteSerie(serie_id){
 
 			},
