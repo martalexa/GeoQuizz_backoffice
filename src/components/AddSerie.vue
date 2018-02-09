@@ -1,8 +1,33 @@
 <template>
 	<div>
-		<h1>Add new serie</h1>
+		<h1>Ajouter une série</h1>
+
+
+		<v-layout>
+	     <v-flex xs12 sm4 offset-sm4>
+	       <v-card>
+	         <v-card-media ref="prevImage" src="" height="400px">
+	         </v-card-media>
+	         <v-card-title primary-title>
+	           <div>
+	             <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
+	             <div>Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+	           </div>
+	         </v-card-title>
+	         <v-card-actions>
+	           <v-btn flat color="orange">Share</v-btn>
+	           <v-btn flat color="orange">Explore</v-btn>
+	         </v-card-actions>
+	       </v-card>
+	     </v-flex>
+	   </v-layout>
+
+
+
+
 		<form @submit.prevent>
-			<v-flex class="text-xs-center text-sm-center text-md-center text-lg-center">
+
+			<v-flex class="text-xs-center">
 				<v-text-field :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
 				<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
 				<v-text-field label="Distance" v-model="serie.distance" required></v-text-field>
@@ -10,13 +35,14 @@
 				<v-select :items="cities" label="La ville" item-text="name" item-value="id" v-model="serie.city.id"></v-select>
 				<v-btn @click="saveSerie">submit</v-btn>
 			</v-flex>
-			<br>
-			<br>
-			<br>
-			<v-flex v-show="prevImageBool" class="text-xs-center text-sm-center text-md-center text-lg-center">
-				<h2>Preview de l'image</h2>
-				<img ref="prevImage" src="" height="500px">
-			</v-flex>
+
+			<div class="previsualisation">
+				<v-flex v-show="prevImageBool" class="text-xs-center">
+					<h2>Prévisualisation</h2>
+					<img ref="prevImage" src="" height="500px">
+				</v-flex>
+			</div>
+
 		</form>
 	</div>
 </template>
@@ -57,7 +83,7 @@
 			},
 			fileChange(e){
 				let files = e.target.files || e.dataTransfer.files
-				
+
 				if(!files.length)
 					return;
 				this.label = files[0].name
@@ -88,5 +114,13 @@
 </script>
 
 <style scoped>
-
+.previsualisation{
+	margin-top : 50px;
+}
+h2{
+margin-bottom: 20px;
+}
+img{
+	border-radius :5px;
+}
 </style>
