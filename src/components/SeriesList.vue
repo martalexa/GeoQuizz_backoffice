@@ -30,7 +30,15 @@
 	            </table>
 	          </v-flex>
 	        </v-layout>
-
+		<v-dialog v-model="dialog" persistent max-width="290">
+			<v-card>
+				<v-card-text>La série à été suprimée</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn color="green darken-1" flat @click.native="dialog = false">Ok</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 
@@ -42,6 +50,7 @@
 		data() {
 			return {
 
+			    dialog: false
 			}
 		},
 		created() {
@@ -55,7 +64,12 @@
 		},
 		methods: {
 			deleteSerie(serie_id){
-
+                this.$store.dispatch('series/deleteSerie', serie_id).then((res) => {
+                    this.dialog = true
+                        console.log(res)
+                }).catch((err) => {
+                    console.log(err);
+				})
 			},
 			modify(){
 				this.$router.push({name:'serie'})
