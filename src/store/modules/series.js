@@ -112,7 +112,7 @@ export default {
 			})
 		},
         patchSerie({ commit, state }, serie) {
-            private_api.patch('series/' + state.current_serie.id + '/edit', serie).then((res) => {
+           return private_api.patch('series/' + state.current_serie.id + '/edit', serie).then((res) => {
                 commit('patchSerie', res.data)
                 return Promise.resolve(res)
             }).catch((e) => {
@@ -120,7 +120,7 @@ export default {
             })
         },
         addPhoto({ commit, state }, newphoto) {
-            private_api.post('/series/' + state.current_serie.id + '/photos', newphoto).then((res) => {
+           return private_api.post('/series/' + state.current_serie.id + '/photos', newphoto).then((res) => {
                 console.log(state.current_serie.id)
                 commit('addNewPhoto', res.data)
                 return Promise.resolve(res)

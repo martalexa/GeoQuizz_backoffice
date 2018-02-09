@@ -7,14 +7,25 @@
 				<div class="column container" id="carte">
 					<div class="carte">
 						<!-- Map -->
-						<v-map ref="map" :zoom="13" :center="[48.6843900, 6.1849600]">
+						<v-map ref="map" :zoom="current_serie.city.zoom_level" :center="[current_serie.city.lat, current_serie.city.lng]">
 							<v-tilelayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tilelayer>
 						</v-map>
 						<!-- End Map -->
 					</div>
 				</div>
+				<v-dialog id="dialog" v-model="dialog" persistent max-width="500px">
+      <v-card>
+        <v-card-title>
+          <h2>La photo a bien était rajoutée</h2>
+        </v-card-title>
+        <v-card-text>
+         <v-btn @click="newMarker()"><v-icon>add_a_photo</v-icon> autre photo</v-btn>
+         <v-btn @click="redirect()">Fin</v-btn>
+       </v-card-text>
+     </v-card>
+   </v-dialog>
 				<v-btn @click="submit">submit</v-btn>
-				<v-btn @click="clear">clear</v-btn>
+				<v-btn @click="redirect()">Cancel</v-btn>
 			</form>
 		</v-container>
 	</div>
@@ -35,11 +46,12 @@ L.Icon.Default.mergeOptions({
 Vue.component('v-map', Vue2Leaflet.Map);
 Vue.component('v-tilelayer', Vue2Leaflet.TileLayer);
 Vue.component('v-marker', Vue2Leaflet.Marker);
-
+import { mapGetters } from 'vuex'
 export default {
 	name: 'serie_photo',
 		data () {
 		return {
+			dialog : false,
 			newPhoto: {
 				lat: '',
 				lng: '',
@@ -54,10 +66,10 @@ export default {
 		}
 	},
 	created(){
-		//let markerGroup = L.layerGroup().addTo(this.$refs.map);
+		
 	},
 	mounted (){
-		//L.marker([50.5, 30.5]).addTo(this.$refs.map.mapObject);
+		
 		this.$refs.map.mapObject.on('click', e => {
 			if(this.marker !== null){
 				this.$refs.map.mapObject.removeLayer(this.marker)
@@ -68,12 +80,10 @@ export default {
 		})
 	},
 	methods:{
-        clear(){
-            //this.image = ''
-        },
+ 
         submit(){
 			this.$store.dispatch('series/addPhoto', this.newPhoto).then((res) => {
-				
+				this.dialog=true
 			}).catch((e) => {
 				console.log(e)
 			})
@@ -92,7 +102,23 @@ export default {
 				vm.newPhoto.photo = vm.newPhoto.photo.split(',')[1]
 			}
 			reader.readAsDataURL(files[0])
+		},
+		newMarker() {
+			this.newPhoto.lat=""
+			this.newPhoto.lng=""
+			this.newPhoto.description=""
+			this.newPhoto.photo=""
+			this.newSelectedPosition.lat =null
+			this.newSelectedPosition.lng=null
+			this.marker=null
+			this.dialog=false
+		},
+		redirect() {
+			this.$router.push({name: 'series_list'})
 		}
+	},
+	computed : {
+		...mapGetters({current_serie: 'series/getCurrentSerie'})
 	}
 }
 
@@ -105,5 +131,8 @@ export default {
 	}
 	#carte{
   		z-index:1;
+	}
+	#dialog {
+		z-index:999;
 	}
 </style>
