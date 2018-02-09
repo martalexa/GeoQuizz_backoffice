@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add"><v-icon color="light-green darken-1">add_circle</v-icon></router-link></h1>
+		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add"><v-icon x-large color="light-green darken-1">add_circle</v-icon></router-link></h1>
 		</br>
 
 		<v-layout row wrap>
