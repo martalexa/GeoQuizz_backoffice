@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add"><v-icon color="light-green darken-1">add_circle</v-icon></router-link></h1>
+		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add" class="titre"><v-icon color="light-green darken-1">add_circle</v-icon></router-link></h1>
 		</br>
 
 		<v-layout row wrap>
-					<v-btn @click="logout()">Logout</v-btn>
+					
 	          <v-flex xs12 xl6 offset-xl3>
 	            <table class="table is-striped">
 	              <thead>
@@ -60,14 +60,6 @@
 			},
 			modify(){
 				this.$router.push({name:'serie'})
-			},
-			logout(){
-				this.$store.dispatch('auth/logout').then((res) => {
-					console.log('bye')
-					this.$router.push({name:'signin'})
-                }).catch((e) => {
-                    
-                })
 			}
 		},
 		computed: {
@@ -77,5 +69,7 @@
 </script>
 
 <style scoped>
-
+.titre{
+	text-decoration: none;
+}
 </style>
