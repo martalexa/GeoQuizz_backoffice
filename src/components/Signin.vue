@@ -1,16 +1,20 @@
 <template>
   <div>
+      <h1>Connexion</h1>
       <form @submit.prevent="signin()">
         Login: <input v-model="user.username" type="text" name=""/>
         Password: <input v-model="user.password" type="password" name=""/>
         <input type="submit" name=""/>
       </form>
+      <signup></signup>
   </div>
 </template>
 
 <script>
+    import signup from '@/components/Signup'
 export default {
   name: 'Signin',
+    components: {signup},
   data () {
     return {
       user: {
