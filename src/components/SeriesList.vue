@@ -15,8 +15,8 @@
 	                </tr>
 	              </thead>
 	              <tbody v-for="serie in series">
-	                <tr>
-	                  <td class="text-xs-center"><b>{{serie.name}}</b></td>
+									<tr>
+	                  <td class="text-xs-center, lien"><b><router-link :to="{name: 'edit_serie', params: {id: serie.id}}">{{serie.name}}</router-link></b></td>
 	                  <td class="text-xs-center">{{serie.distance}}</td>
 	                  <td class="text-xs-center">{{serie.city.name}}</td>
 										<td class="text-xs-center">
@@ -82,5 +82,9 @@
 </script>
 
 <style scoped>
+.lien {
+	text-decoration: none;
+	color:black
 
+}
 </style>

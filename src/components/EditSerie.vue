@@ -36,6 +36,7 @@
 					<v-text-field color="green" type="text" v-model="serie.distance" :label="villeCurrent.distance"></v-text-field>
 
 					<v-btn @click="saveSerie">submit</v-btn>
+					<p>{{villeCurrent}}</p>
 				</form>
 		</v-flex>
 

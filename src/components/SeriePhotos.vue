@@ -73,7 +73,7 @@ export default {
         },
         submit(){
 			this.$store.dispatch('series/addPhoto', this.newPhoto).then((res) => {
-				
+				this.$router.push({name: 'series_list'})
 			}).catch((e) => {
 				console.log(e)
 			})
