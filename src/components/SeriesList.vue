@@ -54,8 +54,7 @@ export default {
 	},
 	created() {
 		this.$store.dispatch('series/getSeries').then((res) => {
-			console.log('Res')
-			console.log(res)
+		
 		}).catch((e) => {
 			console.log('Err')
 			console.log(e)

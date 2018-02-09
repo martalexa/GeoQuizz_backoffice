@@ -25,7 +25,7 @@
      </v-card>
    </v-dialog>
 				<v-btn @click="submit">submit</v-btn>
-				<v-btn @click="redirect()">Cancel</v-btn>
+				<router-link to="/series/all"><v-btn color="red">Cancel</v-btn></router-link>
 			</form>
 		</v-container>
 	</div>
