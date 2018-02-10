@@ -10,14 +10,14 @@
 						<v-card-text>
 							<v-container fluid>
 								<v-layout row v-for="(palier, index) in current_serie.paliers" :key="palier.id">
-									<v-flex xs3 md2>
+									<v-flex xs4 offset-xs1>
 										Coef: <v-text-field type="number" v-model="current_serie.paliers[index].coef"></v-text-field>
 									</v-flex>
-									<v-flex xs3 offset-xs2 md2 offset-md2>
+									<v-flex xs4 offset-xs1>
 										Points: <v-text-field type="number" v-model="current_serie.paliers[index].points"></v-text-field>
 									</v-flex>
-									<v-flex xs2 offset-xs2 md2 offset-md2>
-										<v-icon color="error" v-if="current_serie.paliers.length > 1" type="button" @click="removePalier(index)">delete_forever</v-icon>
+									<v-flex xs1 offset-xs1>
+										<v-icon color="error" v-if="current_serie.paliers.length > 1" fill-height @click="removePalier(index)">delete_forever</v-icon>
 									</v-flex>
 								</v-layout>
 								<v-btn color="primary" type="button" @click="addPalier()">Add</v-btn>
@@ -31,13 +31,13 @@
 						<v-card-text>
 							<v-container fluid>
 								<v-layout row v-for="(time, index) in current_serie.times" :key="time.id">
-									<v-flex xs3>
+									<v-flex xs4 offset-xs1>
 										Nombre de secondes: <v-text-field type="number" v-model="current_serie.times[index].nb_seconds"></v-text-field>
 									</v-flex>
-									<v-flex xs3 offset-xs2 md2 offset-md2>
+									<v-flex xs4 offset-xs1>
 										Multiplicateur: <v-text-field type="number" v-model="current_serie.times[index].coef"></v-text-field>
 									</v-flex>
-									<v-flex xs3 offset-xs2 md2 offset-md2>
+									<v-flex xs4 offset-xs1>
 										<v-icon color="error" v-if="current_serie.times.length > 1" type="button" @click="removeTime(index)">delete_forever</v-icon>
 									</v-flex>
 								</v-layout>
@@ -66,8 +66,7 @@
 				if(this.current_serie.paliers.length >= 1 && this.current_serie.times.length >= 1){
 					//Submitting
 					this.$store.dispatch('series/saveRules', this.current_serie).then((res) => {
-                        this.$router.push({name: 'series_list'})
-
+						this.$router.push({name: 'series_list'})
 					}).catch((e) => {
 						console.log(e)
 					})

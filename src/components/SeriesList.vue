@@ -1,8 +1,7 @@
 <template>
 	<div>
-		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add"><v-icon x-large color="light-green darken-1">add_circle</v-icon></router-link></h1>
-		</br>
-
+		<h1 class="text-xs-center">Liste des séries <router-link to="/series/add" class="lien"><v-icon x-large color="light-green darken-1">add_circle</v-icon></router-link></h1>
+	</br>
 		<v-layout row wrap>
 	          <v-flex xs12 xl6 offset-xl3>
 	            <table class="table is-striped">
@@ -46,46 +45,47 @@
 
 <script>
 
-	import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
-	export default {
-		data() {
-			return {
-
-			    dialog: false
-			}
-		},
-		created() {
-			this.$store.dispatch('series/getSeries').then((res) => {
-
-				console.log(res)
-			}).catch((e) => {
-				console.log('Err')
-				console.log(e)
+export default {
+	data() {
+		return {
+			dialog: false
+		}
+	},
+	created() {
+		this.$store.dispatch('series/getSeries').then((res) => {
+		
+		}).catch((e) => {
+			console.log('Err')
+			console.log(e)
+		})
+	},
+	methods: {
+		deleteSerie(serie_id){
+			this.$store.dispatch('series/deleteSerie', serie_id).then((res) => {
+				this.dialog = true
+			}).catch((err) => {
+				console.log(err);
 			})
 		},
-		methods: {
-			deleteSerie(serie_id){
-                this.$store.dispatch('series/deleteSerie', serie_id).then((res) => {
-                    this.dialog = true
-                        console.log(res)
-                }).catch((err) => {
-                    console.log(err);
-				})
-			},
-			modify(){
-				this.$router.push({name:'serie'})
-			},
-			nbtest($nb){
-			    return $nb >= 10 ? true : false;
-			}
-		},
-		computed: {
-			...mapGetters({series: 'series/getSeries'})
+	modify(){
+		this.$router.push({name:'serie'})
+	},
+        nbtest($nb){
+            return $nb >= 10 ? true : false;
         }
+	},
+	computed: {
+		...mapGetters({series: 'series/getSeries'})
 	}
+}
 </script>
 
 <style scoped>
-
+.lien {
+	text-decoration: none;
+	color:#191919;
+	font-size: 1.3em;
+}
 </style>

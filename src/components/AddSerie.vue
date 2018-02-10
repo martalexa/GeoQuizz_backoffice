@@ -31,11 +31,12 @@
 				<v-text-field color="green" :label="this.label" @click='pickFile' prepend-icon='attach_file'></v-text-field>
 				<input type="file" style="display: none" ref="image" accept="image/x-png,image/gif,image/jpeg" @change="fileChange">
 
-				<v-text-field color="green" label="Type de lieu" v-model="serie.name"></v-text-field>
+				<v-text-field color="green" label="Nom de la Partie" v-model="serie.name"></v-text-field>
 				<v-select color="green" :items="cities" label="La ville" item-text="name" item-value="id" v-model="serie.city.id"></v-select>
 				<v-text-field color="green" label="Distance" v-model="serie.distance"></v-text-field>
 
 				<v-btn @click="saveSerie">submit</v-btn>
+					<router-link to="/series/all"><v-btn color="red">Cancel</v-btn></router-link>
 			</v-flex>
 		</form>
 		</v-flex>
@@ -76,7 +77,7 @@
 		methods: {
 			pickFile () {
             this.$refs.image.click ()
-        },
+        	},
 			deleteSerie(serie_id){
 
 			},
@@ -97,7 +98,6 @@
 					vm.serie.image = vm.serie.image.split(',')[1]
 
 					vm.prevImageBool = true
-					console.log(vm.serie)
 				}
 				reader.readAsDataURL(files[0])
 			},
