@@ -95,7 +95,7 @@ export default {
 				vm.serie.image = vm.serie.image.split(',')[1]
 
 				vm.prevImageBool = true
-				console.log(vm.serie)
+				
 			}
 			reader.readAsDataURL(files[0])
 		},
