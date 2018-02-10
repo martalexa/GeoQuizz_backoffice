@@ -1,8 +1,11 @@
 <template>
   <v-container fill-height text-xs-center>
       <v-layout row wrap align-center>
+          <v-flex xs12>
+              <h1>Back office</h1>
+          </v-flex>
 	        <v-flex xs12 sm12 md5 lg5 xl5>
-            <v-alert color="error" icon="warning" value="true" dismissible v-model="alertConnexion">
+                <v-alert color="error" icon="warning" value="true" dismissible v-model="alertConnexion">
               Erreur lors de la connexion
             </v-alert>
             <h1>Connexion</h1>

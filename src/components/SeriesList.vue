@@ -11,7 +11,8 @@
 	                  <th>Nom</th>
 	                  <th>Distance (m)</th>
 	                  <th>Nom de la ville</th>
-										<th>Modifications</th>
+						<th>Modifications</th>
+						<th>Photos</th>
 	                </tr>
 	              </thead>
 	              <tbody v-for="serie in series">
@@ -25,6 +26,7 @@
 											<router-link :to="{name: 'edit_serie', params: {id: serie.id}}"><button><v-icon color="orange lighten-3">mode_edit</v-icon></button></router-link>
 											<router-link :to="{name: 'serie_rules', params: {id: serie.id}}"><button><v-icon color="cyan lighten-1">playlist_add</v-icon></button></router-link>
 										</td>
+						<td class="text-xs-center" :class="{green:nbtest(serie.count_photo)}">{{serie.count_photo}} / 10</td>
 	                </tr>
 	              </tbody>
 	            </table>
@@ -55,7 +57,7 @@
 		},
 		created() {
 			this.$store.dispatch('series/getSeries').then((res) => {
-				console.log('Res')
+
 				console.log(res)
 			}).catch((e) => {
 				console.log('Err')
@@ -73,11 +75,14 @@
 			},
 			modify(){
 				this.$router.push({name:'serie'})
+			},
+			nbtest($nb){
+			    return $nb >= 10 ? true : false;
 			}
 		},
 		computed: {
 			...mapGetters({series: 'series/getSeries'})
-		}
+        }
 	}
 </script>
 

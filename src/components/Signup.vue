@@ -1,5 +1,5 @@
 <template>
-    <v-flex xs12 sm12 md5 lg5 xl5 offset-md1>
+    <v-flex xs12 sm12 md5 lg5 xl5 offset-md2>
         <v-alert color="error" icon="warning" value="true" dismissible v-model="alert.warning">
             Erreur lors de l'inscription
         </v-alert>
