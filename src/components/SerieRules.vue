@@ -37,10 +37,8 @@
 					//Submitting
 					console.log(this.current_serie)
 					this.$store.dispatch('series/saveRules', this.current_serie).then((res) => {
-						console.log('Success 2')
-						console.log(res)
+						this.$router.push({name: 'series_list'})
 					}).catch((e) => {
-						console.log('Failure 2')
 						console.log(e)
 					})
 				}else{

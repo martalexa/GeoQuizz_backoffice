@@ -68,13 +68,14 @@
 				reader.onload = (e) => {
 					vm.serie.image = e.target.result
 					vm.serie.image = vm.serie.image.split(',')[1]
-					vm.$refs.prevImage.src = e.target.result
+					// Il faut d'abord rajouter la balise à référence prevImage dans le template
+					// vm.$refs.prevImage.src = e.target.result
 				}
 				reader.readAsDataURL(files[0])
 			},
 			saveSerie() {
 				this.$store.dispatch('series/saveSerie', this.serie).then((res) => {
-					this.$router.push({name: 'series'})
+					this.$router.push({name: 'series_list'})
 				}).catch((e) => {
 
 				})
