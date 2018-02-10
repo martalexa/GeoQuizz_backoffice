@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Signin from '@/components/Signin'
+import Signup from '@/components/Signup'
 //Series routes
 import Series from '@/components/Series'
 import AddSerie from '@/components/AddSerie'
@@ -21,6 +22,11 @@ const router = new Router({
       path: '/',
       name: 'signin',
       component: Signin
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: Signup
     },
     { 
       path: '/series', component: Series,

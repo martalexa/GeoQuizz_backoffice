@@ -61,22 +61,23 @@ export default {
             // 		break
             // 	}
             // }
-            console.log('salut')
-            console.log(s)
+            // console.log('salut')
+            // console.log(s)
         }
 	},
 	actions: {
 		getSeries({commit}){
-			return private_api.get('/series').then((res) => {
+			return private_api.get('/series/').then((res) => {
 				commit('setSeries', res.data)
 				return Promise.resolve(res)
 			}).catch((e) => {
 				return Promise.reject(e)
 			})
 		},
-		deleteSerie({commit}, serie_id){
-			return private_api.delete('/series').then((res) => {
+		deleteSerie({commit,state}, serie_id){
+			 return private_api.delete('/series/'+serie_id).then((res) => {
 				commit('removeSerie', serie_id)
+
 			}).catch((e) => {
 				return Promise.reject(e)
 			})
@@ -112,7 +113,7 @@ export default {
 			})
 		},
         patchSerie({ commit, state }, serie) {
-            private_api.patch('series/' + state.current_serie.id + '/edit', serie).then((res) => {
+          return  private_api.patch('series/' + state.current_serie.id + '/edit', serie).then((res) => {
                 commit('patchSerie', res.data)
                 return Promise.resolve(res)
             }).catch((e) => {
@@ -120,7 +121,7 @@ export default {
             })
         },
         addPhoto({ commit, state }, newphoto) {
-            private_api.post('/series/' + state.current_serie.id + '/photos', newphoto).then((res) => {
+           return private_api.post('/series/' + state.current_serie.id + '/photos', newphoto).then((res) => {
                 console.log(state.current_serie.id)
                 commit('addNewPhoto', res.data)
                 return Promise.resolve(res)

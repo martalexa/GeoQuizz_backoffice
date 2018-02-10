@@ -1,25 +1,55 @@
 <template>
-	<div>
-		<p>Series Rules</p>
-		<form @submit.prevent="saveRules()">
-			<h2>Paramétrage des distances (distance de calcul: 100m)</h2>
-
-			<div class="rule-raw" v-for="(palier, index) in current_serie.paliers">
-				Coef: <input type="number" v-model="current_serie.paliers[index].coef">
-				Points: <input type="number" v-model="current_serie.paliers[index].points">
-				<button v-if="current_serie.paliers.length > 1" type="button" @click="removePalier(index)">X</button>
-			</div>
-			<button type="button" @click="addPalier()">Ajouter</button>
-			<h2>Paramétrage du temps (unité: seconde)</h2>
-			<div class="rule-raw" v-for="(time, index) in current_serie.times">
-				Nombre de secondes: <input type="number" v-model="current_serie.times[index].nb_seconds">
-				Multiplicateur: <input type="number" v-model="current_serie.times[index].coef">
-				<button v-if="current_serie.times.length > 1" type="button" @click="removeTime(index)">X</button>
-			</div>
-			<button type="button" @click="addTime()">Ajouter</button>
-			<input type="submit" value="Save">
-		</form>
-	</div>
+	<v-container grid-list-md text-xs-center fluid>
+		<router-link to="/series/all"><v-btn color="primary">Retour</v-btn></router-link>
+		<h1 class="text-xs-center">Serie rules</h1>
+			<form @submit.prevent="saveRules()">
+				<v-layout row wrap>
+				<v-flex xs12 sm12 md6>
+					<v-card color="grey lighten-4" flat>
+						<h2>Paramétrage des distances (distance de calcul: 100m)</h2>
+						<v-card-text>
+							<v-container fluid>
+								<v-layout row v-for="(palier, index) in current_serie.paliers" :key="palier.id">
+									<v-flex xs4 offset-xs1>
+										Coef: <v-text-field type="number" v-model="current_serie.paliers[index].coef"></v-text-field>
+									</v-flex>
+									<v-flex xs4 offset-xs1>
+										Points: <v-text-field type="number" v-model="current_serie.paliers[index].points"></v-text-field>
+									</v-flex>
+									<v-flex xs1 offset-xs1>
+										<v-icon color="error" v-if="current_serie.paliers.length > 1" fill-height @click="removePalier(index)">delete_forever</v-icon>
+									</v-flex>
+								</v-layout>
+								<v-btn color="primary" type="button" @click="addPalier()">Add</v-btn>
+							</v-container>
+						</v-card-text>
+					</v-card>
+				</v-flex>
+				<v-flex xs12 sm12 md6>
+					<v-card xs5 offset-xs2 color="grey lighten-4" flat>
+						<h2>Paramétrage du temps (unité: seconde)</h2>
+						<v-card-text>
+							<v-container fluid>
+								<v-layout row v-for="(time, index) in current_serie.times" :key="time.id">
+									<v-flex xs4 offset-xs1>
+										Nombre de secondes: <v-text-field type="number" v-model="current_serie.times[index].nb_seconds"></v-text-field>
+									</v-flex>
+									<v-flex xs4 offset-xs1>
+										Multiplicateur: <v-text-field type="number" v-model="current_serie.times[index].coef"></v-text-field>
+									</v-flex>
+									<v-flex xs4 offset-xs1>
+										<v-icon color="error" v-if="current_serie.times.length > 1" type="button" @click="removeTime(index)">delete_forever</v-icon>
+									</v-flex>
+								</v-layout>
+								<v-btn color="primary" type="button" @click="addTime()">Add</v-btn>
+							</v-container>
+						</v-card-text>
+					</v-card>
+				</v-flex>
+					<v-btn color="primary" type="submit" value="save">Save</v-btn>
+				</v-layout>
+			</form>
+	</v-container>
 </template>
 
 <script>
@@ -35,7 +65,6 @@
 			saveRules() {
 				if(this.current_serie.paliers.length >= 1 && this.current_serie.times.length >= 1){
 					//Submitting
-					console.log(this.current_serie)
 					this.$store.dispatch('series/saveRules', this.current_serie).then((res) => {
 						this.$router.push({name: 'series_list'})
 					}).catch((e) => {
@@ -74,5 +103,7 @@
 </script>
 
 <style scoped>
-	
+	form{
+		width: 100%;
+	}
 </style>
