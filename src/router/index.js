@@ -29,7 +29,7 @@ const router = new Router({
       component: Signup
     },
     { 
-      path: '/series', component: Series, name: 'series',
+      path: '/series', component: Series,
       children: [
         {
           path: 'add',
@@ -45,7 +45,6 @@ const router = new Router({
         {
           path: ':id',
           component: Serie,
-          name: 'serie',
           children: [
             {
               path: 'edit',
@@ -63,6 +62,10 @@ const router = new Router({
               name: 'serie_photos'
             }
           ]
+        },
+        {
+          path: '/',
+          component: SeriesList,
         }
       ]
     }
@@ -77,7 +80,7 @@ router.beforeEach((to, from, next) => {
       next({name: 'signin', query: {redirect: to.fullPath}})
     }
     else if ((to.name == 'signin' || to.name == 'signup') && store.getters['auth/isConnected']) {
-      next({name: 'series'})
+      next({name: 'series_list'})
     }
     else {
       next()

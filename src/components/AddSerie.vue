@@ -98,7 +98,6 @@
 					vm.serie.image = vm.serie.image.split(',')[1]
 
 					vm.prevImageBool = true
-					
 				}
 				reader.readAsDataURL(files[0])
 			},

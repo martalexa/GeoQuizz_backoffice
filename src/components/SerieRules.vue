@@ -66,8 +66,7 @@
 				if(this.current_serie.paliers.length >= 1 && this.current_serie.times.length >= 1){
 					//Submitting
 					this.$store.dispatch('series/saveRules', this.current_serie).then((res) => {
-                        this.$router.push({name: 'series_list'})
-
+						this.$router.push({name: 'series_list'})
 					}).catch((e) => {
 						console.log(e)
 					})
