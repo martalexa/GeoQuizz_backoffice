@@ -1,21 +1,22 @@
-# backoffice
+# Geoquizz Frontend: Backoffice
 
-> Atelier: Backoffice
+Application réalisée dans le cadre de l'atelier 2, LP CISIIE
 
-## Build Setup
 
-``` bash
-# install dependencies
-npm install
+## Réalisée Par
 
-# serve with hot reload at localhost:8080
-npm run dev
+- Alexandra MARTIN
+- Mohamed ALHASNE
+- Nicolas BOBELET
+- Yann Dumas
+- Daniel RICKLIN
 
-# build for production with minification
-npm run build
+## Pré-requis
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+- NPM
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Installation
+
+- Installer les dépendances en exécutant `$ npm install`
+- Démarrer le projet en mode développement `$ npm run dev`
+- Aller sur le lien affiché sur la console
